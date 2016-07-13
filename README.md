@@ -1,11 +1,11 @@
 # Goa UUID Example
 
 ## Depends on
-- Flyway
-- Goa
-- Gorma
-- Postgres
-- Glide
+- [Flyway](https://flywaydb.org/)
+- [Goa](https://github.com/goadesign/goa)
+- [Gorma](https://github.com/goadesign/goa)
+- [Postgres](https://www.postgresql.org/)
+- [Glide](https://github.com/Masterminds/glide)
 
 ## Usage
 
