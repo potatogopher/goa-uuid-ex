@@ -1,0 +1,203 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  CreateUserPayload:
+    properties:
+      email:
+        description: email of user
+        format: email
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    title: CreateUserPayload
+    type: object
+  UpdateUserPayload:
+    properties:
+      email:
+        description: email of user
+        format: email
+        type: string
+      new_password:
+        type: string
+      old_password:
+        type: string
+    title: UpdateUserPayload
+    type: object
+  User:
+    description: A User
+    example:
+      created_at: 2014-08-04T23:48:26-06:00
+      deleted_at: 2011-12-28T15:26:30-07:00
+      email: foo@example
+      href: /users/6ba7b810-9dad-11d1-80b4-00c04fd430c8
+      id: 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+      updated_at: 1999-10-01T04:35:40-06:00
+    properties:
+      created_at:
+        description: Creation time of the user
+        example: 2014-08-04T23:48:26-06:00
+        format: date-time
+        type: string
+      deleted_at:
+        description: When user was deleted
+        example: 2011-12-28T15:26:30-07:00
+        format: date-time
+        type: string
+      email:
+        description: email of user
+        example: foo@example
+        format: email
+        type: string
+      href:
+        description: API href of the user
+        example: /users/6ba7b810-9dad-11d1-80b4-00c04fd430c8
+        type: string
+      id:
+        description: ID of user
+        example: 6ba7b810-9dad-11d1-80b4-00c04fd430c8
+        format: uuid
+        type: string
+      updated_at:
+        description: Last time user was updated
+        example: 1999-10-01T04:35:40-06:00
+        format: date-time
+        type: string
+    required:
+    - id
+    - href
+    - email
+    - created_at
+    - updated_at
+    title: 'Mediatype identifier: application/vnd.user+json'
+    type: object
+host: http://localhost:8080
+info:
+  contact:
+    email: nick@rucci.io
+    name: Nick Rucci
+    url: http://rucci.io
+  description: UUID Example
+  title: UUID
+  version: ""
+paths:
+  /users:
+    post:
+      description: Create new user.
+      operationId: user#create
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/CreateUserPayload'
+      responses:
+        "201":
+          description: Resource created
+          headers:
+            Location:
+              description: href to created resource
+              pattern: /users/[0-9-a-f]+
+              type: string
+          schema:
+            $ref: '#/definitions/User'
+        "500":
+          description: Internal Server Error
+      schemes:
+      - https
+      summary: create user
+      tags:
+      - user
+  /users/{userID}:
+    delete:
+      description: Delete user with given id.
+      operationId: user#delete
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+      schemes:
+      - https
+      summary: delete user
+      tags:
+      - user
+    get:
+      description: Retrieve user with given id.
+      operationId: user#show
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        "404":
+          description: Not Found
+      schemes:
+      - https
+      summary: show user
+      tags:
+      - user
+    put:
+      description: Update users's attributes for given id.
+      operationId: user#update
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: string
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateUserPayload'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      schemes:
+      - https
+      summary: update user
+      tags:
+      - user
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+responses:
+  BadRequest:
+    description: Bad Request
+  InternalServerError:
+    description: Internal Server Error
+  NoContent:
+    description: No Content
+  NotFound:
+    description: Not Found
+schemes:
+- https
+swagger: "2.0"

@@ -1,0 +1,32 @@
+package: github.com/potatogopher/goa-uuid-ex
+import:
+- package: github.com/goadesign/goa
+  subpackages:
+  - client
+  - design
+  - design/apidsl
+  - dslengine
+  - goagen
+  - middleware
+- package: golang.org/x/tools
+  subpackages:
+  - go/ast/astutil
+- package: gopkg.in/yaml.v2
+- package: github.com/kelseyhightower/envconfig
+- package: github.com/joho/godotenv
+- package: github.com/onsi/ginkgo
+- package: github.com/onsi/gomega
+- package: github.com/serenize/snaker
+- package: github.com/goadesign/gorma
+  version: bug/many_to_many_tablename
+  repo: git://github.com/brycereitano/gorma.git
+  vcs: git
+- package: github.com/AlekSi/pointer
+- package: golang.org/x/crypto
+  subpackages:
+  - scrypt
+- package: github.com/elithrar/simple-scrypt
+- package: github.com/satori/go.uuid
+- package: bitbucket.org/pkg/inflect
+- package: github.com/wawandco/fako
+- package: github.com/manveru/faker
