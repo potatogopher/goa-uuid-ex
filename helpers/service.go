@@ -5,7 +5,7 @@ import (
 	"github.com/goadesign/goa/middleware"
 	_ "github.com/lib/pq"
 
-	"github.com/rocketmade/wheel-api/config"
+	"github.com/potatogopher/goa-uuid-ex/config"
 )
 
 // MyNewService sets up the  goa service with default middleware.
